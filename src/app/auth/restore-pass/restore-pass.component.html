@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-title">Restoring Password</div>
+  <div class="card-content">
+    <form (ngSubmit)="onSubmitRestorePass(f)" #f="ngForm" *ngIf="!requestPasswordUpdate; else requestSent">
+        <div class="input-group">
+          <label id="label-restore">Enter your email:</label>
+          <input type="email"
+                 name="email"
+                 placeholder="Email"
+                 ngModel
+                 required
+                 />
+        </div>
+        <div class="card-buttons">
+            <button class="btn btn-cancel" (click)="handleCancelRestorePass()">Cancel</button>
+            <button class="btn btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
+    <ng-template #requestSent>
+      <h3>Please, check your email for a link to change the password.</h3>
+    </ng-template>
+  </div>
+</div>
+<app-error-modal *ngIf="ifError" 
+                  (closeModal)="handleCloseModal()"
+                  [errorData]="errorData"></app-error-modal>
+    

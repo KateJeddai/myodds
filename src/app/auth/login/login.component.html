@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-content">
+    <div class="card-title">Login:</div>
+    <form [formGroup]="form" (ngSubmit)="onLoginUser();">
+      <div class="input-field">
+          <label>Email:</label>
+          <input type="email" 
+                 placeholder="Email" 
+                 class="form-control" 
+                 name="email"
+                 formControlName="email"
+                 required
+                 />
+      </div>
+      <div class="input-field">
+          <label>Password:</label>
+          <input type="text" 
+                 placeholder="Password" 
+                 class="form-control"
+                 name="password" 
+                 formControlName="password"
+                 required
+                 />
+      </div>
+      <a routerLink="/restore-password" id="link">Forgot your password?</a>
+      <button class="btn btn-submit" type="submit">Submit</button>
+    </form>
+  </div>
+ </div> 
+ <app-error-modal *ngIf="ifError" 
+                  (closeModal)="handleCloseModal($event)"
+                  [errorData]="errorData"></app-error-modal>

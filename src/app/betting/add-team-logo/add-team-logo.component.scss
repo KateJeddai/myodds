@@ -1,0 +1,79 @@
+@import '../../app-variables';
+@import '../../app.mixins.scss';
+
+.card {
+    width: 300px;
+    box-sizing: border-box;
+    padding: $m $sm;
+    margin: $sm;
+    background-color: $light-grey;
+    border-radius: $xs;
+    .card-title {
+        text-align: center;
+        margin-bottom: $sm;
+        font-size: $m;
+        color: $blue;
+        font-family: "Jost";
+    }
+    form {
+        width: 100%;
+        text-align: center;
+        div.input-field {
+            width: 100%;
+            margin-bottom: $sm;
+            input {
+               @include input;
+               font-size: $s;  
+               margin-bottom: 0;     
+            }
+            .custom-file-input::-webkit-file-upload-button {
+                border: 1px solid $input;
+                color: $input;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                cursor: pointer;
+                font-size: 0.8rem;  
+                margin-left: -8px;
+            }
+            .custom-file-input:hover {
+                border-color: $input;
+            }
+            .custom-file-input:active {
+                border-color: $input;
+            }
+            label {
+                @include label;
+            }            
+        }
+        .btn.btn-submit {
+            @include button;
+            background-color: lighten($blue, 10%);
+            color: $white;
+            width: 100%;
+            border-radius: $xs;
+            &:disabled {
+                background-color: lighten($blue, 10%);
+                cursor: default;
+            }
+            &:hover:enabled {
+                background-color: saturate($blue, 10%);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media(max-width:768px) {
+    .card {
+        margin: $s auto 0 auto;
+    }
+}
+
+@media(max-width:600px) {
+    .card {
+        width: 280px;
+    }
+}

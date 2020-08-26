@@ -1,0 +1,110 @@
+<div class="bets-list_container">
+    <div class="bets-buttons_wrapper">
+            <app-showbets-buttons class="bets-buttons"
+                                  *ngIf="isAuthenticated"
+                                  [showActiveBetsButton]="!showActiveBets"
+                                  [showArchivedBetsButton]="!showArchivedBets"></app-showbets-buttons>
+    </div>
+    <div *ngIf="showActiveBets" class="bets-container">
+        <h2>Active Tickets</h2>
+        <div *ngIf="ifActiveBets(); else noActive" class="bets-container-inner active"> 
+            <div [ngClass]="{
+                'bets-wrapper-active-many': activeOrdinaryBets && activeOrdinaryBets.length > 2,
+                'bets-wrapper-active-one': activeOrdinaryBets && activeOrdinaryBets.length <= 2 
+              }">
+                <app-bet *ngFor="let bet of activeOrdinaryBets"
+                        [bet]="bet"
+                        [betType]="'active ordinary'"></app-bet>
+            </div>
+            <div [ngClass]="{
+                'bets-wrapper-active-many': activeCombinedBets && activeCombinedBets.length > 2,
+                'bets-wrapper-active-one': activeCombinedBets && activeCombinedBets.length <= 2 
+              }">            
+                <app-bet *ngFor="let bet of activeCombinedBets"
+                        [bet]="bet"
+                        [betType]="'active combined'"></app-bet> 
+            </div>
+        </div>
+        <ng-template #noActive>
+            <div class="no-tickets-wrapper">
+                You have no active tickets
+            </div>    
+        </ng-template> 
+    </div>
+    <div *ngIf="showArchivedBets" class="bets-container">
+        <h2>Expired Tickets</h2>
+        <div *ngIf="ifArchivedBets(); else noArchived" class="bets-container-inner archived"> 
+            <div class="won-bets-wrapper" *ngIf="ifBetsWon()">
+                <h3>Won Tickets</h3>                       
+                <div class="bets-wrapper">
+                    <div *ngIf="archivedOrdinaryBetsWon && archivedOrdinaryBetsWon.length > 0" class="archived_container">
+                        <div>
+                            <app-bet-paginator class="paginator"
+                                               [length]="setPaginatorsLength('paginator_ordwon')"
+                                               (pageChanged)="onChangePage($event, 'paginator_ordwon')"                                             
+                                               #paginator_ordwon></app-bet-paginator>
+                            <button class="btn btn-show-all" (click)="showAllArchived('ordinary won')">
+                                {{ showAllOrdWon ? 'Hide All' : 'Show All' }}
+                            </button>                                            
+                        </div>                    
+                        <div><app-bet *ngFor="let bet of archivedOrdinaryBetsWon"
+                                      [bet]="bet"
+                                      [betType]="'archived ordinary won'"></app-bet></div> 
+                    </div>
+                    <div *ngIf="archivedCombinedBetsWon && archivedCombinedBetsWon.length > 0" class="archived_container">
+                        <div>
+                            <app-bet-paginator  class="paginator"
+                                                [length]="setPaginatorsLength('paginator_combwon')"
+                                                (pageChanged)="onChangePage($event, 'paginator_combwon')"                                             
+                                                #paginator_combwon></app-bet-paginator>                             
+                           <button class="btn btn-show-all" (click)="showAllArchived('combined won')">
+                               {{ showAllCombWon ? 'Hide All' : 'Show All' }}
+                           </button>
+                        </div>                     
+                        <div><app-bet *ngFor="let bet of archivedCombinedBetsWon"
+                                       [bet]="bet"
+                                       [betType]="'archived combined won'"></app-bet></div> 
+                    </div>
+                </div>                
+            </div>
+            <div class="lost-bets-wrapper" *ngIf="ifBetsLost()">
+                <h3>Lost Tickets</h3>       
+                <div class="bets-wrapper">
+                    <div *ngIf="archivedOrdinaryBetsLost && archivedOrdinaryBetsLost.length > 0" class="archived_container">
+                        <div>
+                            <app-bet-paginator  class="paginator"
+                                                [length]="setPaginatorsLength('paginator_ordlost')"
+                                                (pageChanged)="onChangePage($event, 'paginator_ordlost')" 
+                                                #paginator_ordlost></app-bet-paginator>
+                            <button class="btn btn-show-all" (click)="showAllArchived('ordinary lost')">
+                                {{ showAllOrdLost ? 'Hide All' : 'Show All' }}
+                            </button>                    
+                        </div>                        
+                        <div><app-bet *ngFor="let bet of archivedOrdinaryBetsLost"
+                                      [bet]="bet"
+                                      [betType]="'archived ordinary lost'"></app-bet></div>                            
+                    </div> 
+                    <div *ngIf="archivedCombinedBetsLost && archivedCombinedBetsLost.length > 0" class="archived_container">
+                        <div>
+                            <app-bet-paginator class="paginator"
+                                            [length]="setPaginatorsLength('paginator_comblost')"
+                                            (pageChanged)="onChangePage($event, 'paginator_comblost')" 
+                                            #paginator_comblost></app-bet-paginator>      
+                            <button class="btn btn-show-all" (click)="showAllArchived('combined lost')">
+                                {{ showAllCombLost ? 'Hide All' : 'Show All' }}
+                            </button>
+                        </div> 
+                        <div><app-bet *ngFor="let bet of archivedCombinedBetsLost"
+                                      [bet]="bet"
+                                      [betType]="'archived combined lost'"></app-bet></div>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+        <ng-template #noArchived>
+            <div class="no-tickets-wrapper">
+                You have no archived tickets
+            </div>
+        </ng-template>  
+    </div>     
+</div>

@@ -1,0 +1,34 @@
+  <div class="div-content" *ngIf="editMode">
+      <div class="div-title">Add Results:</div>
+      <form [formGroup]="form_result" (ngSubmit)="onSubmitGameResult();">
+        <div class="select-winner-field">
+          <label>Winner</label>
+          <select formControlName="winner" *ngIf="game" (change)="handleSelectColor($event)">
+            <option [ngValue]="null" disabled selected>Select the winner:</option>
+            <option [ngValue]="game.first_team">{{game.first_team}}</option>
+            <option [ngValue]="game.second_team">{{game.second_team}}</option>
+            <option [ngValue]="'Draw'">Draw</option>
+          </select>
+        </div>
+        <div class="input-field">
+            <label>First Team Score</label>
+            <input type="number"
+                   placeholder='Add {{game && game.first_team}} score'
+                   class="form-control"
+                   formControlName="first_team_score"
+                   />
+          </div>
+          <div class="input-field">
+              <label>Second Team Score</label>
+              <input type="number"
+                     placeholder='Add {{game && game.second_team}} score'
+                     class="form-control"
+                     formControlName="second_team_score"
+                     />
+            </div>
+          <button class="btn btn-submit" type="submit">Submit</button>
+      </form>
+  </div>
+  <app-error-modal *ngIf="isError" 
+                  (closeModal)="handleCloseModal($event)"
+                  [errorData]="errorData"></app-error-modal>

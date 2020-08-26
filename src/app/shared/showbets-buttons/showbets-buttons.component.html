@@ -1,0 +1,8 @@
+<div class="bets-buttons">
+  <button class="btn btn-show"
+          *ngIf="showActiveBetsButton" 
+          (click)="handleShowActiveBets()">Active Tickets</button>
+  <button class="btn btn-show" 
+          *ngIf="showArchivedBetsButton" 
+          (click)="handleShowArchivedBets()">Expired Tickets</button>
+</div>

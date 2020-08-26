@@ -1,0 +1,134 @@
+    <div class="bet-div" *ngIf="betType === 'active ordinary'">
+        <div class="div-game-date">{{bet.game.game_date}}</div>
+        <div>{{bet.game.first_team}} vs {{bet.game.second_team}}</div>
+        <div class="bet-data"><span>Bet on:</span> {{bet.team}}</div>
+        <div class="odds-stake_wrapper">
+            <div class="bet-data"><span>Odds:</span> {{bet.myProfit.odds}}</div>             
+            <div class="bet-data stake"><span>Stake:</span> ${{bet.amount}}</div>
+        </div>
+        <p><span>Potential profit:</span> ${{bet.myProfit.profit}}</p> 
+    </div>
+    <div class="bet-div-combined" *ngIf="betType === 'active combined'">    
+        <div *ngFor="let game of bet.games">
+            <div class="div-game-date">{{game.game_date}}</div>
+            <div>{{game.first_team}} vs {{game.second_team}}</div>
+            <div *ngFor="let team of bet.teams">
+                <div *ngIf="team.gameId === game._id" class="bet-data"><span>Bet on:</span> {{team.team}}</div>
+            </div>
+            <div class="results-wrapper" *ngIf="game.game_result.winner">
+                <div class="first-game-result result-div">
+                    <div>{{game.first_team}}</div>
+                    <div>{{game.game_result.score.first_team_score}}</div> 
+                </div>
+                <div><fa-icon [icon]="faFutbol"></fa-icon></div>                    
+                <div class="second-game-result result-div">
+                    <div>{{game.second_team}}</div>
+                    <div>{{game.game_result.score.second_team_score}}</div> 
+                </div>
+            </div>
+            <div class="odds-stake_wrapper">
+                <div class="bet-data"><span>Odds:</span> {{getOddsForCombinedBet(game, bet)}}</div>  
+                <div class="bet-data stake"><span>Stake:</span> ${{bet.amount}}</div>           
+            </div>               
+        </div>  
+        <p>Potential profit: ${{bet.myProfit}}</p>
+    </div> 
+
+    <div class="bet-div-archived" *ngIf="betType === 'archived ordinary won'">
+        <div class="div-game-date">{{bet.game.game_date}}</div>
+        <div class="div-game-teams">{{bet.game.first_team}} vs {{bet.game.second_team}}</div>
+        <div>Bet on: {{bet.team}}</div>
+        <h3>Game result:</h3>
+        <div class="results-wrapper">                   
+            <div class="first-game-result result-div">
+                <div>{{bet.game.first_team}}</div>
+                <div>{{bet.game.game_result.score.first_team_score}}</div> 
+            </div>
+            <div><fa-icon [icon]="faFutbol"></fa-icon></div>                    
+            <div class="second-game-result result-div">
+                <div>{{bet.game.second_team}}</div>
+                <div>{{bet.game.game_result.score.second_team_score}}</div> 
+            </div>
+        </div>
+        <div>Stake: ${{bet.amount}}</div>
+        <div class="underline"></div>
+        <p>Your win: ${{bet.myWin}}</p> 
+    </div>
+    
+    <div class="bet-div-combined-archived" *ngIf="betType === 'archived combined won'">    
+        <div *ngFor="let game of bet.games">
+            <div class="div-game-date">{{game.game_date}}</div>
+            <div class="div-game-teams">{{game.first_team}} vs {{game.second_team}}</div>
+            <div *ngFor="let team of bet.teams">
+                <div *ngIf="team.gameId === game._id">Bet on {{team.team}}</div>
+            </div>
+            <h3>Game result:</h3>
+            <div class="results-wrapper">                   
+                <div class="first-game-result result-div">
+                    <div>{{game.first_team}}</div>
+                    <div>{{game.game_result.score.first_team_score}}</div> 
+                </div>
+                <div><fa-icon [icon]="faFutbol"></fa-icon></div>                    
+                <div class="second-game-result result-div">
+                    <div>{{game.second_team}}</div>
+                    <div>{{game.game_result.score.second_team_score}}</div> 
+                </div>
+            </div>
+        </div> 
+        <div>Stake: ${{bet.amount}}</div>
+        <div class="underline"></div>
+        <p *ngIf="bet.myWin > 0; else combinedlost">You get: ${{bet.fullWin}}</p>
+        <!-- <ng-template #combinedlostfull>You lose: ${{bet.fullWin * -1}}</ng-template> -->
+        <p *ngIf="bet.myWin > 0">Your profit: ${{bet.myWin}}</p>
+        <ng-template #combinedlost>Your loss: ${{bet.amount}}</ng-template>
+    </div>   
+    
+    <div class="bet-div-archived lost"  *ngIf="betType === 'archived ordinary lost'">
+        <div class="div-game-date">{{bet.game.game_date}}</div>
+        <div class="div-game-teams">{{bet.game.first_team}} vs {{bet.game.second_team}}</div>
+        <div>Bet on: {{bet.team}}</div>
+        <h3>Game result:</h3>
+        <div class="results-wrapper">                   
+            <div class="first-game-result result-div">
+                <div>{{bet.game.first_team}}</div>
+                <div>{{bet.game.game_result.score.first_team_score}}</div> 
+            </div>
+            <div><fa-icon [icon]="faFutbol"></fa-icon></div>                    
+            <div class="second-game-result result-div">
+                <div>{{bet.game.second_team}}</div>
+                <div>{{bet.game.game_result.score.second_team_score}}</div> 
+            </div>
+        </div>
+        <div>Stake: ${{bet.amount}}</div> 
+        <div class="underline"></div>
+        <p>Your loss: ${{bet.myWin * -1}}</p> 
+    </div>
+
+    <div class="bet-div-combined-archived lost" *ngIf="betType === 'archived combined lost'">    
+        <div *ngFor="let game of bet.games">
+            <div class="div-game-date">{{game.game_date}}</div>
+            <div class="div-game-teams">{{game.first_team}} vs {{game.second_team}}</div>
+            <div *ngFor="let team of bet.teams">
+                <div *ngIf="team.gameId === game._id">Bet on {{team.team}}</div>
+            </div>
+            <h3>Game result:</h3>
+            <div class="results-wrapper">                   
+                <div class="first-game-result result-div">
+                    <div>{{game.first_team}}</div>
+                    <div>{{game.game_result.score.first_team_score}}</div> 
+                </div>
+                <div><fa-icon [icon]="faFutbol"></fa-icon></div>                    
+                <div class="second-game-result result-div">
+                    <div>{{game.second_team}}</div>
+                    <div>{{game.game_result.score.second_team_score}}</div> 
+                </div>
+            </div>
+        </div>  
+        <div>Stake: ${{bet.amount}}</div>
+        <div class="underline"></div>
+        <p *ngIf="bet.myWin > 0; else combinedlost">You get: ${{bet.fullWin}}</p>
+        <!-- <ng-template #combinedlostfull>You lose: ${{bet.fullWin * -1}}</ng-template> -->
+        <p *ngIf="bet.myWin > 0">Your profit: ${{bet.myWin}}</p>
+        <ng-template #combinedlost>Your loss: ${{bet.amount}}</ng-template>
+    </div>
+

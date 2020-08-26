@@ -1,0 +1,67 @@
+@import '../../app-variables';
+@import '../../app.mixins';
+
+div.div-content {
+    width: 300px;
+    box-sizing: border-box;
+    padding: $m $sm;
+    margin: $sm;
+    background-color: $light-grey;
+    border-radius: $xs;
+    div.div-title {
+        text-align: center;
+        margin-bottom: $sm;
+        font-size: $m;
+        color: $blue;
+        font-family: "Jost";
+    }
+    form {
+        width: 100%;
+        text-align: center;
+        div.input-field, .select-winner-field {
+            width: 100%;
+            margin-bottom: $sm;
+            label {
+                @include label;
+            }
+            input {
+               @include input;
+               font-size: $s;  
+               margin-bottom: 0;     
+            }
+            select {
+                @include input;
+                font-size: $s;  
+                margin-bottom: 0; 
+                color: $input;
+            }
+        }
+        .btn.btn-submit {
+            @include button;
+            background-color: lighten($blue, 10%);
+            color: $white;
+            width: 100%;
+            border-radius: $xs;
+            &:disabled {
+                background-color: lighten($blue, 10%);
+                cursor: default;
+            }
+            &:hover:enabled {
+                background-color: saturate($blue, 10%);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media(max-width:768px) {
+    div.div-content {
+        margin: $s auto 0 auto;
+    }
+}
+
+@media(max-width:600px) {
+    div.div-content {
+        width: 280px;
+    }
+}

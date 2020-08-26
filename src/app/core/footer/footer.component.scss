@@ -1,0 +1,12 @@
+@import '../../app-variables';
+
+footer {
+    font-family: "Jost";
+    font-size: $s;
+    width: 100vw;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $light-grey;
+}

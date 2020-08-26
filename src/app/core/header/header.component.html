@@ -1,0 +1,22 @@
+<header>
+  <div class="logo_wrapper">
+    <div id="brand-name">
+      <a routerLink="/">
+        <span>Win</span><span class="icon-wrapper"><fa-icon [icon]="faFutbol"></fa-icon></span>Bet
+      </a>
+    </div>
+  </div>
+  <nav class="nav_wrapper">
+    <ul class="nav" *ngIf="isAuthenticated; else notAuth">
+      <li class="nav-item"><a routerLink="/my-account" routerLinkActive="active">My Account</a></li>
+      <li class="nav-item"><a routerLink="#" class="btn btn-logout" (click)="onLogout()">Logout</a></li>
+    </ul>
+    <ng-template #notAuth>
+        <ul class="nav">
+            <li class="nav-item"><a routerLink="/register" routerLinkActive="active">Join Now</a></li>
+            <li class="nav-item"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        </ul>
+    </ng-template>
+  </nav>
+</header>
+ 

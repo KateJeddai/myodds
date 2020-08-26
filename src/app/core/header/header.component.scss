@@ -1,0 +1,118 @@
+@import '../../app-variables';
+
+@keyframes rotation {
+    0% {transform: rotate(0deg);}
+    25% {transform: rotate(90deg);}
+    50% {transform: rotate(180deg);}
+    75% {transform: rotate(270deg);}
+    100% {transform: rotate(360deg);}
+}
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo_wrapper {
+        flex-basis: 50%;
+        #brand-name {
+             font-family: "Bangers";
+             letter-spacing: 0.2rem;
+             a {
+                 text-decoration: none;
+                 color: $grey; 
+                 font-size: $xl; 
+                 &:hover {
+                     color: $white;
+                 }
+                 span.icon-wrapper { 
+                     display: inline-block;   
+                     &:hover {
+                        animation-name: rotation;
+                        animation-duration: 250ms;
+                        animation-iteration-count: 2;
+                        animation-timing-function: cubic-bezier(0.7, 0.1, 0.1, 0.7);
+                        animation-fill-mode: forwards;
+                     }             
+                 }
+                 fa-icon {
+                     color: $white;
+                     font-size: 2.6rem; 
+                 }             
+             }  
+             span {
+                 color: $orange;
+             } 
+        }
+    }
+    nav.nav_wrapper {
+        flex-basis: 40%;
+        display: flex;
+        justify-content: flex-end;
+        font-family: "Jost";
+        ul.nav {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            li {
+                list-style: none;
+                margin-right: $xl;
+                a {
+                    text-decoration: none;
+                    color: $grey;
+                    font-size: $sm;
+                    &:hover {
+                        color: $white;
+                    }
+                }
+            } 
+            li:last-child {
+                margin-right: 0;
+            }           
+        }
+    }
+}
+
+@media(max-width:768px) {
+    header {
+        .logo_wrapper {
+            #brand-name {
+                 a {
+                    font-size: $l; 
+                    fa-icon {
+                       font-size: 2rem; 
+                    } 
+                 }
+            }
+        }
+        nav.nav_wrapper {
+            ul.nav {
+                li {
+                   margin-right: $m;
+                   a {
+                       font-size: $s;
+                   }
+                }
+            }
+        }
+    }
+
+}
+
+@media(max-width:420px) {
+    header {
+        height: 80px;
+        padding: 0 $xs;
+        box-sizing: border-box;
+        justify-content: space-between;
+        nav.nav_wrapper {
+            justify-content: center;
+            ul.nav {
+                li {
+                   margin-right: $sm;
+                }
+            }
+        }
+    }
+}
+

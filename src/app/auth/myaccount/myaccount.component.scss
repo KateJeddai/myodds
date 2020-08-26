@@ -1,0 +1,221 @@
+@import '../../app-variables';
+@import '../../app.mixins.scss';
+
+.user-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: $m auto;
+    padding: $sm;
+    box-sizing: border-box;
+    border: 1px solid $grey;
+    font-family: "Jost";
+    color: $grey;
+    .my-data_content {
+        flex-basis: 20%;
+        h3 {
+            margin: 0;
+            margin-bottom: $sm;
+            font-size: $m;
+            color: $orange;
+        }
+        .my-data {
+            margin-bottom: $sm;
+            color: $green;
+        }
+        .my-data span {
+            color: $grey;
+        }
+    }
+    .buttons-wrapper {
+        display: flex;
+        flex-basis: 78%;
+        justify-content: space-between;
+    }
+    .reset-timer {
+        flex-basis: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        .reset-deposit_content {
+            color: $blue;
+        }
+        .my-deposit {
+            color: $green;
+            margin:0 auto $sm auto;
+        }
+        .my-deposit span {
+            color: $white;
+        }
+        .btn.btn-reset {
+            @include button;
+            width: 50%;
+            background-color: transparent;
+            background-color: transparent;
+            border: 1px solid $blue;
+            color: $blue;
+            &:hover {
+                border: 1px solid saturate(#a7ccec, 25%);                
+                -webkit-box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                -moz-box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                color: saturate(#a7ccec, 25%);
+            }
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            box-sizing: border-box;
+            .input-field {
+                width: 100%;
+                margin: $xs 0;
+                input, select, option {
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding: $xxs;
+                    color: lighten($brown, 15%);
+                    font-family: "Jost";
+                    font-size: 1rem;
+                }
+                input::placeholder { 
+                    color: lighten($brown, 15%);
+                    opacity: 1; 
+                }
+                input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                    color: lighten($brown, 15%);
+                }
+                  
+                input::-ms-input-placeholder { /* Microsoft Edge */
+                    color: lighten($brown, 15%);
+                }
+            }
+            .btn.btn-submit {
+                @include button;
+                background-color: transparent;
+                border: 1px solid $blue;
+                color: $blue;
+                width: 100%;
+                margin-bottom: $xs;
+            }
+        }
+    }
+    .tickets_buttons {
+        flex-basis: 37%;
+        .btn.btn-edit {
+            @include button; 
+            width: 100%;
+            background-color: transparent;
+            background-color: transparent;
+            border: 1px solid $blue;
+            a {
+                text-decoration: none;
+                color: $blue;
+            }
+            &:hover {
+                border: 1px solid saturate(#a7ccec, 25%);                
+                -webkit-box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                -moz-box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                box-shadow: 0px 0px 8px -2px rgba(167,204,236,1);
+                a {
+                    color: saturate(#a7ccec, 25%);
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:1200px) {
+    .user-wrapper {
+        .buttons-wrapper {
+            .reset-timer {
+                .btn.btn-reset {
+                    width: 70%;
+                }
+                form {
+                    width: 70%;
+                }
+            }   
+
+        }
+    }
+}
+
+@media(max-width:900px) {
+    .user-wrapper {
+        .buttons-wrapper {
+            flex-direction: column;
+            flex-basis: 70%;
+            .reset-timer {
+                flex-basis: 80%;
+                margin-bottom: $sm;
+                .btn.btn-reset {
+                    width: 70%;
+                }
+            }
+            .tickets_buttons {
+                flex-basis: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .btn.btn-edit {
+                    width: 70%;
+                }
+                .bets-buttons {
+                    display: flex;
+                    width: 70%;                   
+                }
+            }   
+
+        }
+    }
+}
+
+// @media(max-width:768px) {
+//     .user-wrapper {
+//         .buttons-wrapper {
+//             .tickets_buttons {
+//                 .bets-buttons{
+//                    justify-content: space-between;                 
+//                 }
+//             } 
+//         }
+//     }
+// }
+
+@media(max-width:600px) {
+    .user-wrapper {
+        flex-direction: column;
+        .buttons-wrapper {
+            flex-basis: 100%;
+            .reset-timer {
+                flex-basis: 100%;
+                .btn.btn-reset {
+                    width: 90%;
+                }
+            }
+            .tickets_buttons {
+                flex-basis: 100%;
+                .btn.btn-edit {
+                    width: 90%;
+                }
+                .bets-buttons{
+                    width: 90%;                   
+                }
+            } 
+        }
+    }
+}
+
+@media(max-width:420px) {
+    .user-wrapper {
+        .buttons-wrapper {
+            .reset-timer {
+                margin-bottom: $xs;
+            }
+        }
+    }
+}
+

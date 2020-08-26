@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-content">
+    <div class="card-title">Add Team Logo:</div>
+    <form [formGroup]="form" (ngSubmit)="onSubmitItem();">
+      <div class="input-field">
+          <input type="text" 
+                 placeholder="Enter a team name" 
+                 class="form-control"                  
+                 name="team_name"
+                 formControlName="team_name"
+                 />
+      </div>
+      <div class="input-field">
+          <input type="file" 
+                 class="custom-file-input" 
+                 (change)="onImagePicked($event)"
+                 />
+      </div>      
+      <button class="btn btn-submit" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

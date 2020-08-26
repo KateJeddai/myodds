@@ -1,0 +1,59 @@
+<div class="user-wrapper" *ngIf="userData">
+  <div class="my-data_content">
+      <h3>Profile Data</h3>
+      <div class="user-field">
+        <div class="my-data firstname"><span>First Name:</span> {{userData.firstname}}</div>
+        <div class="my-data lastname"><span>Last Name:</span> {{userData.lastname}}</div>
+        <div class="my-data email"><span>Email:</span> {{userData.email}}</div>
+      </div>
+  </div>
+  <div class="buttons-wrapper">
+      <div *ngIf="noLimit; else resetTimer" class="reset-timer">    
+          <div class="my-deposit"><span>Active Deposit:</span> ${{userData.deposit_limit}}</div>  
+          <button class="btn btn-reset" (click)="handleResetDepositForm()">{{resetDeposit ? "Cancel" : "Reset Deposit"}}</button>
+          <form [formGroup]="formReset" (ngSubmit)="handleResetDeposit()" *ngIf="resetDeposit">
+            <div class="input-field">
+              <input type="number" 
+                      placeholder="Limit Deposit Amount" 
+                      class="form-control"
+                      name="deposit_limit" 
+                      min="5"
+                      step="10"
+                      formControlName="deposit_limit"
+                      (keydown)="onHandleWrongKeys($event)"
+                      />
+            </div>
+            <div class="input-field">
+              <select class="frequency-select" class="form-control" formControlName="frequency_limit">
+                <option [value]="'Select Update Frequency'" [selected]="true" disabled>Select Update Frequency</option>
+                <option value="No limit">No limit</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+            </div>
+            <button class="btn btn-submit" type="submit">Submit</button>
+          </form>
+      </div>
+      <div class="tickets_buttons">       
+        <app-showbets-buttons class="bets-buttons"
+                              [showActiveBetsButton]="true"
+                              [showArchivedBetsButton]="true"></app-showbets-buttons>
+        <button class="btn btn-edit"><a routerLink="/register/{{userData._id}}" 
+                                        [queryParams]="{noLimit: noLimit}" 
+                                        queryParamsHandling="merge">Edit Profile Data</a></button>
+      </div>
+      <ng-template #resetTimer>
+        <div class="reset-timer">      
+          <div class="my-deposit"><span>Active Deposit:</span> ${{userData.deposit_limit}}</div>  
+          <p>You'll be able to reset the deposit in:</p>
+          <div class="reset-deposit_content">{{timeLeftToDepositReset.days}} days {{timeLeftToDepositReset.hours}} hours 
+                {{timeLeftToDepositReset.mins}} mins {{timeLeftToDepositReset.secs}} secs
+          </div>
+        </div>
+      </ng-template> 
+  </div>
+</div>
+<app-error-modal *ngIf="ifError" 
+                  (closeModal)="handleCloseModal($event)"
+                  [errorData]="errorData"></app-error-modal>      

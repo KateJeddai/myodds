@@ -1,0 +1,56 @@
+@import '../../app-variables.scss';
+
+.modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: $l;
+    left: 0;
+    z-index: 10;
+}
+.modal-container {
+    position: relative;
+    width: 350px;
+    height: auto;
+    min-height: 150px;
+    background-color: $white;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 100;
+    padding: $xs;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Jost"; 
+    font-size: $sm;   
+    border-radius: $xs;
+    -webkit-box-shadow: 0px 0px 6px 6px rgba(38,35,38,1);
+    -moz-box-shadow: 0px 0px 6px 6px rgba(38,35,38,1);
+    box-shadow: 0px 0px 6px 6px rgba(38,35,38,1);
+    .modal_title {
+        h3 {
+            margin: 0;
+            font-size: $m;
+            color: $blue;
+        }
+    }
+    .close_modal {
+        position: absolute;
+        top: $xs;
+        right: $sm;
+        font-size: $m;
+        cursor: pointer;
+        color: darken($grey, 15%);
+    }
+}
+
+@media(max-width:420px) {
+    .modal-container {
+        width: 290px;
+    }
+}

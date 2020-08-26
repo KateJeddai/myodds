@@ -1,0 +1,97 @@
+<div class="div-container">
+  <div class="div-content" *ngIf="!updateSuccess; else success">
+    <div class="div-title">Add a Game:</div>
+    <form [formGroup]="form" (ngSubmit)="onSubmitGame();">
+      <div class="input-field">
+          <label>First Team</label>
+          <input type="text" 
+                 placeholder="First Team" 
+                 class="form-control" 
+                 name="first-team"
+                 formControlName="first_team"
+                 />
+      </div>
+      <div class="input-field">
+          <label>Second Team</label>
+          <input type="text" 
+                 placeholder="Second Team" 
+                 class="form-control"
+                 name="second-team" 
+                 formControlName="second_team"
+                 />
+      </div>
+      <div class="input-field">
+          <label>First team winning odds</label>
+          <input type="number" 
+                 placeholder="First team winning odds" 
+                 class="form-control"
+                 name="firstwin-odds" 
+                 formControlName="firstwin_odds"
+                 />
+      </div>
+      <div class="input-field">
+        <label>Second team winning odds</label>
+        <input type="number" 
+               placeholder="Second team winning odds" 
+               class="form-control"
+               name="secondwin-odds" 
+               formControlName="secondwin_odds"
+               />
+      </div>
+      <div class="input-field">
+        <label>Draw odds</label>
+        <input type="number" 
+               placeholder="Draw odds" 
+               class="form-control"
+               name="draw-odds" 
+               formControlName="draw_odds"
+               />      
+      </div>
+      <div class="input-field">
+        <label>Match Date</label>
+        <input type="date" 
+               placeholder="Game Date" 
+               class="form-control"
+               name="game-date" 
+               formControlName="game_date"
+               />      
+      </div>
+      <div class="input-field">
+        <label>Match Time</label>
+        <input type="time" 
+               placeholder="Game Time" 
+               class="form-control"
+               name="game-time" 
+               formControlName="game_time"
+               />      
+      </div>
+      <div class="input-field">
+        <label>Game Type (League)</label>
+        <input type="text" 
+               placeholder="Game Type (League)" 
+               class="form-control"
+               name="game-type" 
+               formControlName="game_type"
+               />      
+      </div>
+      <button class="btn btn-submit" type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="add-logo-results_wrapper">
+      <app-add-team-logo></app-add-team-logo>
+      <app-add-result *ngIf="editMode && !updateSuccess" [game]="game" [gameResults]="results"></app-add-result>
+  </div>
+  <app-error-modal *ngIf="isError" 
+                  (closeModal)="handleCloseModal($event)"
+                  [errorData]="errorData"></app-error-modal> 
+  <ng-template #success>
+    <div class="data_success">
+      <p>Data was {{editMode ? 'updated' : 'added'}} successfully.</p>
+      <p>Go to the <a routerLink="/">main page</a> or        
+                   <a [routerLink]="editMode ? ['/betting/edit', game._id] : ['/add-game']" (click)="handleReloadEdit()">
+                        {{editMode ? 'edit again.' : 'add another game.'}}
+                   </a></p>
+    </div> 
+  </ng-template> 
+</div>
+

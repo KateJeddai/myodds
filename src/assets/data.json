@@ -1,0 +1,36 @@
+{
+    "games": [
+        {
+            "id": "1",
+            "first_team": "Dinamo",
+            "second_team": "Shahtar",
+            "firstwin_odds": 1.5,
+            "secondwin_odds": 2.5,
+            "draw_odds": 4,
+            "game_date": "1597243500000",
+            "game_type": "Belarussian-Premier-League"
+        },
+        {
+            "id": "2",
+            "first_team": "Arsenal",
+            "second_team": "Chelsea",
+            "firstwin_odds": 2.5,
+            "secondwin_odds": 1.5,
+            "draw_odds": 3,
+            "game_date": "1596379500000",
+            "game_type": "European-League"
+        },
+        {
+            "id": "3",
+            "first_team": "Liverpool",
+            "second_team": "Manchester City",
+            "firstwin_odds": 2.5,
+            "secondwin_odds": 1.5,
+            "draw_odds": 3,
+            "game_date": "1596379500000",
+            "game_type": "European-League"
+        }
+
+    ]
+   
+}

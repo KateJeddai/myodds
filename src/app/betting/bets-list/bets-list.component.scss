@@ -1,0 +1,257 @@
+@import '../../app-variables';
+@import '../../app.mixins.scss';
+
+.bets-list_container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    .bets-buttons_wrapper {
+        z-index: 30;
+        width: 200px;
+        align-self: flex-end;
+        position: absolute;
+    }
+    .bets-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        h2 {
+            color: $orange;
+            margin: 0;
+            margin-bottom: $sm;
+            font-family: "Jost";
+        }
+        .bets-container-inner {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            .bets-wrapper-active-one {
+                display: flex;
+                justify-content: flex-start;
+            }
+            .bets-wrapper-active-many {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-column-gap: $sm; 
+            }
+            .won-bets-wrapper, .lost-bets-wrapper {            
+                h3 {
+                    color: $orange;
+                    font-family: "Jost";
+                    margin: 0;
+                    margin-bottom: $sm;
+                }
+                .bets-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    flex-wrap: wrap; 
+                    .archived_container {
+                        display: flex;
+                        flex-direction: column;
+                        div {
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                    }
+                }
+            }            
+        }
+        // .bets-container-inner.active {
+        //     border: 1px solid red;
+        // }
+        .bets-container-inner.archived {
+            flex-direction: column;
+            width: 100%;
+            .bets-wrapper {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                justify-content: flex-start;
+                .archived_container {
+                    width: 100%;
+                    display: flex;
+                    div {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+                    .btn.btn-show-all {
+                        @include button;
+                        width: 100px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: $xs;
+                        background-color: transparent;
+                        color: lighten($brown, 30%);
+                    }
+                }
+            }            
+        }
+        .no-tickets-wrapper {
+            width: 300px;
+            margin: $m 0;
+            color: $light-grey;
+            font-size: $m;
+            font-family: "Jost";
+        }
+    }
+}
+
+:host ::ng-deep.mat-paginator .mat-paginator-container{
+    justify-content: flex-start;
+    background-color: $brown;
+    color: lighten($brown, 30%);
+    .mat-icon-button {
+        color: $light-grey;
+        &:hover {
+            cursor: pointer;
+        }
+    }    
+    .mat-button.mat-primary[disabled], 
+    .mat-button.mat-accent[disabled], 
+    .mat-button.mat-warn[disabled], 
+    .mat-button[disabled][disabled], 
+    .mat-icon-button.mat-primary[disabled], 
+    .mat-icon-button.mat-accent[disabled], 
+    .mat-icon-button.mat-warn[disabled], 
+    .mat-icon-button[disabled][disabled], 
+    .mat-stroked-button.mat-primary[disabled], 
+    .mat-stroked-button.mat-accent[disabled], 
+    .mat-stroked-button.mat-warn[disabled], 
+    .mat-stroked-button[disabled][disabled] {
+        color: lighten($brown, 20%);
+        cursor: default;
+    }
+    .mat-select-value, 
+    .mat-select-arrow {
+        color: lighten($brown, 30%);
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background-color: lighten($brown, 20%);
+    }
+}
+
+@media(max-width:1200px) {
+    .bets-list_container {
+        .bets-container {
+            h2 {
+               margin-bottom: $m;            
+            }
+            .bets-container-inner {
+                .bets-wrapper-active-many {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-column-gap: $sm; 
+                }
+            }
+            .bets-container-inner.archived {
+                .bets-wrapper {
+                   .archived_container {
+                        align-items: center;
+                        width: 100vw;
+                        div {
+                            justify-content: flex-start;
+                        }
+                    }
+                }            
+            }
+        }
+        .bets-buttons_wrapper {
+            align-self: flex-end;
+            right: 20%;
+        }
+    }
+}
+
+@media(max-width:900px) {
+    .bets-list_container {
+        .bets-container {
+            .bets-container-inner.archived {
+                .bets-wrapper {
+                    .archived_container {
+                        align-items: center;
+                        width: 100%;
+                        margin-left: 0;                        
+                        div {
+                           justify-content: center;
+                        }
+                    }
+                }
+            }
+            .bets-container-inner.active {
+                justify-content: center;
+            }        
+        }
+        h3 {
+            text-align: center;
+        }
+        .bets-buttons_wrapper {
+            right: 0;
+            width: 400px;
+        }
+    }
+}
+
+@media(max-width:768px) {
+    :host ::ng-deep.mat-paginator .mat-paginator-container {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+}
+
+@media(max-width:600px) {    
+    .bets-list_container {
+        .bets-container {
+            justify-content: center;            
+            .bets-container-inner.active {
+                .bets-wrapper-active-many {
+                    grid-template-columns: 1fr;
+                }
+                .bets-wrapper-active-one {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                }
+            }
+        }
+    }
+    :host ::ng-deep.mat-paginator .mat-paginator-container {
+        .mat-paginator-page-size {
+            display: none;
+        }
+    }
+}
+
+@media(max-width:420px) {
+    .bets-list_container {
+        .bets-buttons_wrapper {
+            position: relative;
+            width: 300px;
+            align-self: center;
+        }
+        h2, h3 {
+            text-align: center;
+            margin-bottom: $xs;
+        }                 
+    }
+    .bets-list_container {
+        .bets-container {
+           .bets-container-inner.archived {
+                .bets-wrapper {
+                    .archived_container {
+                        .btn.btn-show-all {                            
+                            width: 80px;   
+                        }
+                    }
+                }            
+            } 
+        }
+    }
+}

@@ -1,0 +1,162 @@
+@import '../../app-variables';
+
+.ticket-card {
+    width: 260px;
+    background-color: $white;
+    box-sizing: border-box;
+    border-radius: $xs;
+    padding-bottom: $m;
+    font-family: "Jost";
+    margin: 0 $m $m auto;
+    -webkit-box-shadow: 0px 0px 26px 6px rgba(20,15,20,1);
+    -moz-box-shadow: 0px 0px 26px 6px rgba(20,15,20,1);
+    box-shadow: 0px 0px 26px 6px  rgba(20,15,20,1);
+    z-index: -2;
+    h3 {
+        margin: 0;
+        height: 40px;
+        font-size: $sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-right-radius: $xs;
+        border-top-left-radius: $xs;
+        background-color: $grey;
+    }
+    .ticket-header {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        .ticket-type_wrapper {
+            flex-basis: 40%;
+            text-align: center;
+            .active-ticket-type_underline {
+                height: 2px;
+                width: 80%;
+                background-color: $orange;
+                margin: 0 auto;
+            }
+            .ticket-type_underline {
+                height: 2px;
+                width: 80%;
+                background-color: transparent;
+                margin: 0 auto;
+            }
+        }
+    }
+    .ticket-content {
+        padding: $m;
+        a {
+            color: $blue;
+            text-decoration: none;
+        }
+        span.link {
+            color: $blue;
+            cursor: pointer;
+        }
+        .ticket-item {
+            margin-bottom: $sm;
+        }
+        .ticket-item-teams {
+            display: flex;
+            justify-content: space-between;
+            color: $blue;
+            font-size: $sm;
+        }
+        .btn.btn-cancel {
+            border: none;
+            background-color: transparent;
+            color: darken($green, 30%);
+            font-size: $sm;
+        }
+        .general-coef {
+            margin-bottom: $xs;
+        }
+        .game-odds span, 
+        .general-coef span, 
+        .potential-win span,
+        .potential-profit span {
+            color: #000;
+        }
+        .game-odds, 
+        .general-coef, 
+        .potential-win,
+        .potential-profit {            
+            color: $orange;
+        }
+        .add-stake {
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;                
+            input {
+                width: 50%;
+                margin-bottom: $xs;
+                padding: $xxs;
+                box-sizing: border-box;
+                outline: none;
+                border: 1px solid $grey;
+            }
+        }
+        .win-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+    }
+    .active-bet-type {
+        color: saturate($orange, 25%);
+        font-weight: bold;        
+    }
+    .btn.btn-submit{
+        margin: 0 auto;        
+        display: block;
+        width: calc(100% - 2 * 1.5rem); 
+        padding: $xs;  
+        border-radius: $xs;
+        border: none;
+        background-color: $green;
+        cursor: pointer;
+        font-family: "Jost";
+        font-size: 1rem;
+        &:disabled {
+            background-color: $grey;
+            cursor: default;
+        }
+        &:hover:enabled {
+            background-color: darken($green, 10%);
+        }
+    }
+    .example-handle {
+        position: absolute;
+        top: -60px;
+        right: -30px;
+    }
+}
+#div-error {
+    color: $error;
+    margin-bottom: $xs;
+}
+
+@media(max-width:768px) {
+    .ticket-card {
+        width: 200px;
+        position: absolute;
+        transform: translateX(-380px);
+        bottom: 0px;
+        .ticket-content {
+            padding: $s;
+        }
+        .btn.btn-submit{
+            font-size: $s;
+        }
+    }
+    
+    .ticket-card.display-betform {
+        z-index: 20;
+        transform: translateX(0px);
+    }
+}

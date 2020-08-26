@@ -1,0 +1,8 @@
+{
+    "MONGO_USER": "katia_admin",
+    "MONGO_PASS": "Bluediser12191293@",
+    "MONGO_DB": "my-odds",
+    "JWT_SECRET": "gxjasg567dasj@hjk",
+    "APP_ADMIN": "arab.freeresources@gmail.com",
+	"ADMIN_PASS": "Bluediser12191293@"
+}

@@ -1,0 +1,20 @@
+@import 'app-variables.scss';
+
+.container {
+    width: 80%;
+    height: auto;
+    min-height: calc(100vh - 90px);
+    margin: 0 auto;
+}
+@media(max-width:900px) {
+    .container {
+        width: 95%;
+    }
+}
+@media(max-width:768px) {
+    .container {
+        width: 98%;
+    }
+}
+
+

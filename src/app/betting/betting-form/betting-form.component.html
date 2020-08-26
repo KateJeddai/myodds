@@ -1,0 +1,63 @@
+<div class="ticket-card" #bettingForm cdkDrag [cdkDragDisabled]="isMobile()"> 
+  <h3>Betting Ticket</h3>
+  <div class="ticket-header">   
+      <div *ngIf="!isMobile()" class="example-handle" cdkDragHandle>
+          <svg width="24px" fill="#777777" viewBox="0 0 24 24">
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+      </div>     
+    <div class="ticket-type_wrapper">
+        <div class="ticket-type" [ngClass]="{
+          'active-bet-type': selectedGames.length < 2      
+        }">Ordinary</div>
+        <div [ngClass]="{
+          'active-ticket-type_underline': selectedGames.length < 2,
+          'ticket-type_underline': selectedGames.length >= 2
+        }"></div>        
+    </div>
+    <div class="ticket-type_wrapper">
+        <div class="ticket-type" [ngClass]="{
+          'active-bet-type': selectedGames.length >= 2      
+        }">Express</div>
+        <div [ngClass]="{
+          'active-ticket-type_underline': selectedGames.length >= 2,
+          'ticket-type_underline': selectedGames.length < 2 
+        }"></div>
+    </div>
+  </div>  
+  <div class="ticket-content">
+      <div *ngFor="let game of selectedGames" class="ticket-item">
+        <div class="ticket-item-teams">
+            <div class="game-teams">{{game.first_team}} vs {{game.second_team}}</div>
+            <button class="btn btn-cancel" (click)="onCancelBet(game._id)">x</button>
+        </div>        
+        <div class="game-odds"><span>Your odds:</span> {{game.selectedOdds}}</div>       
+      </div>
+      <div class="general-coef" *ngIf="selectedGames.length > 0"><span>General Coefficient:</span> {{generalCoef}}</div>
+      <div class="count-money" *ngIf="userAuthenticated">
+        <div *ngIf="isError" id="div-error">{{errorData}}</div>
+        <div class="add-stake">
+          <label>Stake Amount:</label>
+          <input type="number" 
+                 min="5" 
+                 onpaste="return false;"
+                 [ngModel]="betAmount" 
+                 (keydown)="onHandleWrongKeys($event)"
+                 (change)="onSetBetAmount($event)"
+                 #inp />
+        </div>
+        <div class="win-wrapper" *ngIf="!isError && selectedGames.length > 0">
+          <div class="potential-win" *ngIf="generalCoef && betAmount">
+            <span>Win:</span> {{generalCoef && betAmount && (generalCoef * betAmount).toFixed(2)}}
+          </div>  
+          <div class="potential-profit" *ngIf="generalCoef && betAmount">
+            <span>Profit:</span> {{generalCoef && betAmount && (generalCoef * betAmount - betAmount).toFixed(2)}}
+          </div>   
+        </div> 
+      </div>
+      <p *ngIf="!userAuthenticated">Please, <span class="link" (click)="handleLogin()">login</span> or 
+                                            <span class="link" (click)="handleRegister()">register</span> to place your bet!</p>
+  </div>
+  <button *ngIf="userAuthenticated" class="btn btn-submit" [disabled]="selectedGames.length <= 0 || isError" (click)="onPlaceBet()">Bet Now!</button>
+</div>

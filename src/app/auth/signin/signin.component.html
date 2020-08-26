@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="card-content" *ngIf="!registered; else signed">
+    <div class="card-title">{{ editMode ? "Edit Data" : "Register" }}:</div>
+    <form [formGroup]="form" (ngSubmit)="onSubmitUser();">
+      <div class="input-field">
+          <label>First Name</label>
+          <input type="text" 
+                  placeholder="First Name" 
+                  class="form-control" 
+                  name="firstname"
+                  formControlName="firstname"
+                  required
+                  />
+      </div>
+      <div class="input-field">
+          <label>Last Name</label>
+          <input type="text" 
+                 placeholder="Last Name" 
+                 class="form-control" 
+                 name="lastname"
+                 formControlName="lastname"
+                 required
+                 />
+      </div>
+      <div class="input-field">
+          <label>Email</label>
+          <input type="email" 
+                 placeholder="Email" 
+                 class="form-control" 
+                 name="email"
+                 formControlName="email"
+                 required
+                 />
+      </div>
+      <div class="input-field">
+          <label>Password</label>
+          <input type="password" 
+                 placeholder="Password" 
+                 class="form-control"
+                 name="password" 
+                 formControlName="password"
+                 required
+                 />
+      </div>
+      <div class="input-field" *ngIf="!editMode || (editMode && noLimit === 'true')">
+          <label>Limit Amount (USD)</label>
+          <input type="number" 
+                 placeholder="Limit Deposit Amount" 
+                 class="form-control"
+                 name="deposit_limit"
+                 min="5" 
+                 step="10"
+                 formControlName="deposit_limit"
+                 required
+                 (keydown)="onHandleWrongNubers($event)"
+                 />
+      </div>
+      <div class="input-field" *ngIf="!editMode || (editMode && noLimit === 'true')">
+        <label>Set a Frequency Limit</label>
+        <select class="form-control" formControlName="frequency_limit" required (change)="handleSelectColor($event)">
+          <option [value]="'Set a Frequency Limit'" 
+                  disabled
+                  [selected]="true"  
+                  >Set a Frequency Limit</option>
+          <option value="No limit">No limit</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+      </div>
+      <div *ngIf="editMode" class="signin-buttons edit-mode">
+          <div class="btn btn-cancel edit-mode" (click)="handleCancelEdit()">Cancel</div>
+          <button class="btn btn-submit edit-mode" type="submit">Submit</button>
+      </div>
+      <div *ngIf="!editMode" class="signin-buttons">
+          <button class="btn btn-submit" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  <ng-template #signed>
+    <p *ngIf="!edited">The registration is complete. Wanna <a routerLink="/login">login?</a></p>
+    <p *ngIf="edited" class="edit-success">Personal data has been updated! <br/>
+        <button class="btn btn-reset-edit"(click)="resetEdited()">Continue editing?</button> 
+        <button class="btn btn-account"><a routerLink="/my-account">Go to my account?</a></button> 
+    </p>
+  </ng-template>
+ </div> 
+ <app-error-modal *ngIf="ifError" 
+                  (closeModal)="handleCloseModal($event)"
+                  [errorData]="errorData"></app-error-modal>

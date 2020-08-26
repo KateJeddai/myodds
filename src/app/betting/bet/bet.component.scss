@@ -1,0 +1,286 @@
+@import '../../app-variables';
+
+.bet-div {
+    position: relative;
+    width: 250px;   
+    padding: $sm 0;
+    box-sizing: border-box;
+    margin-right: $sm;
+    margin-bottom: $sm;
+    font-family: "Jost";
+    height: 400px;        
+    background-color: $light-grey;
+    text-align: center;
+    div:nth-child(2) {
+        color: $blue;            
+        font-size: $m;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $xs;
+    }
+    div.bet-data {
+        display: flex;
+        flex-direction: column;
+        font-size: $m;
+        color: $brown;
+        margin-bottom: $xs;
+        span {
+            font-size: $s;
+            color: lighten($brown, 40%);
+        }
+    }
+    div.stake {
+        font-size: $m;
+    }
+    p:last-child {
+        background-color: $green;
+        font-size: $sm;
+        padding: $xxs 0;
+    }    
+}
+.bet-div-combined {
+    position: relative;
+    width: 250px; 
+    padding: $sm 0;
+    box-sizing: border-box;
+    margin-right: $sm;
+    margin-bottom: $sm;
+    font-family: "Jost";
+    height: auto;
+    background-color: $light-grey;
+    text-align: center;
+    div div:nth-child(2):not(.stake) {
+        color: $blue;
+        font-size: $m;
+        height: 80px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $xs;
+    }
+    div.bet-data {
+        display: flex;
+        flex-direction: column;
+        font-size: $m;
+        color: $brown;
+        margin-bottom: $xs;
+        span {
+            font-size: $s;
+            color: lighten($brown, 40%);
+        }
+    }
+    div.bet-data.stake {
+        font-size: $m;
+    }
+    p {
+        background-color: $green;
+        font-size: $sm;
+        padding: $xxs 0;
+    }
+    .results-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 $sm;
+        margin: 0;
+        .result-div {
+            flex-basis: 40%;
+            div {
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+        }
+    }  
+}
+.div-game-date {
+    background-color: $orange;
+    color: $white;
+    font-size: $sm;
+    padding: $xxs 0;            
+}
+.bet-div {
+    p {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.bets-group-archived.lost {
+    .bet-div, .bet-div-combined {
+        .div-game-date {
+            background-color: lighten($blue, 10%);
+        }
+    }
+} 
+    .bet-div-archived {
+        height: 360px;        
+        p {
+            position: absolute; 
+            bottom: calc((30px - 16px) / 2);
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            height: 30px;            
+        }
+        div.underline {
+            width: 100%;
+            height: 2px;
+            background-color: $grey;
+            position: absolute;
+            bottom: 30px;
+        }
+        
+    }
+    .bet-div-combined-archived {
+        height: auto;
+    }
+    .bet-div-archived, .bet-div-combined-archived {
+        position: relative;
+        width: 250px;    
+        padding: $sm 0;
+        box-sizing: border-box;
+        margin-bottom: $m;
+        font-family: "Jost";
+        margin-right: $m;   
+        background-color: $light-grey;
+        text-align: center;        
+        h3 {
+            margin: $xs 0;
+            font-size: $sm;
+        }
+        .div-game-date + div {
+            font-weight: bold;
+            font-size: $sm;
+            margin: $xs 0;
+        }
+        .div-game-date {
+            color: $white;
+            font-size: $sm;
+            padding: $xxs 0;
+            background-color: darken($green, 10%);
+        }
+        .div-game-teams {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 $xs;
+        }
+        div.underline {
+            width: 100%;
+            height: 2px;
+            background-color: $grey;
+        }
+        .results-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 $sm;
+            > div:nth-of-type(2) {
+                color: $blue;
+            }
+            .result-div {
+                flex-basis: 40%;
+                div {
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+            }
+        }   
+    } 
+    
+    .bet-div-archived div.underline, 
+    .bet-div-combined-archived div.underline {
+        margin: $sm auto;
+    }
+    .bet-div-archived.lost, .bet-div-combined-archived.lost {
+        .div-game-date {
+            color: $white; 
+            font-size: $sm;
+            padding: $xxs 0;
+            background-color: lighten($blue, 10%);
+        }
+    }
+
+@media(max-width:1200px) {
+    .bet-div-archived, .bet-div-combined-archived {
+        width: 220px;   
+        padding: $s 0;
+    }
+}
+
+@media(max-width:600px) { 
+    .bet-div, .bet-div-combined,
+    .bet-div-archived, .bet-div-combined-archived {
+        div:nth-child(2) {
+            margin: 0;
+        }
+    }
+}
+
+@media(max-width:600px) { 
+    .bet-div, .bet-div-combined,
+    .bet-div-archived, .bet-div-combined-archived {
+        width: 350px; 
+        padding: $s 0;
+        margin-right: 0;
+        .div-game-teams {
+            height: 30px;
+        }
+        .results-wrapper {
+            .result-div {
+                div {
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                } 
+                
+            }
+        } 
+        .odds-stake_wrapper {
+            display: flex;
+            height: 60px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            div {
+                flex-basis: 25%;
+                height: auto;
+                margin-bottom: $xs;
+            }
+            div:first-child {
+                margin-right: $s;
+            }
+        }  
+    }
+    .bet-div-archived, .bet-div {
+        height: 320px;
+    } 
+    .bet-div-combined-archived {
+        height: auto;
+        p {
+            margin: 0;            
+            margin-bottom: $xs;
+        }
+    }
+}
+
+@media(max-width:420px) {
+    .bet-div, .bet-div-combined,
+    .bet-div-archived, .bet-div-combined-archived {
+        width: 280px;   
+        padding: $s 0;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,47 @@
+@import './app-variables.scss';
+
+@mixin button {
+    padding: $xs;  
+    border-radius: $xs;
+    border: none;
+    cursor: pointer;
+    font-family: "Jost";
+    font-size: 1rem;    
+    outline: none;
+}
+
+@mixin card {
+    width: 350px;
+    margin: $xl auto;
+    padding: $sm $m;
+    box-sizing: border-box;
+    background-color: $white;
+    text-align: center;
+    border-radius: $xs;
+    -webkit-box-shadow: 0px 3px 10px -5px rgba(224,224,224,1);
+    -moz-box-shadow: 0px 3px 10px -5px rgba(224,224,224,1);
+    box-shadow: 0px 3px 10px -5px rgba(224,224,224,1);
+    @media(max-width:420px) {
+        width: 290px;
+    }
+}
+
+@mixin input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: "Jost";      
+    font-size: $sm;
+    margin-bottom: $xs;
+    padding: $xxs $xs;
+    outline: none;
+    color: #272727;
+}
+
+@mixin label {
+    display: block;
+    text-align: left;
+    margin-bottom: $xxs;
+    font-size: 0.8rem;
+    color: $blue;
+    font-family: "Jost";
+}

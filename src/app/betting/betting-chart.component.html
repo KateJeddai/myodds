@@ -1,0 +1,52 @@
+<div class="chart_container">
+  <div class="table_wrapper"> 
+      <table class="games-table_content">
+        <thead>
+          <tr>
+            <th colspan="7" *ngIf="isAdmin">Matches</th>
+            <th colspan="6" *ngIf="isAuthenticated && !isAdmin">Matches</th>
+            <th colspan="5" *ngIf="!isAuthenticated && !isAdmin">Matches</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let leagueName of leaguesNames"> 
+          <tr class="league-title">
+            <th colspan="7" *ngIf="isAdmin && windowWidth > 1200">{{ leagueName }}</th>
+            <th colspan="6" *ngIf="isAuthenticated && !isAdmin">{{ leagueName }}</th>
+            <th colspan="5" *ngIf="!isAuthenticated && !isAdmin">{{ leagueName }}</th>
+          </tr>
+          <tr>
+            <th>Game Date</th>
+            <th>Teams</th>
+            <th>1</th>
+            <th>x</th>
+            <th>2</th>
+            <th *ngIf="isAdmin && windowWidth > 1200"></th>
+            <th *ngIf="isAuthenticated  && windowWidth > 1200" class="betted-th">Betted On</th>
+          </tr>
+          <tr *ngFor="let game of leagues[leagueName]" class="games-row">
+            <td><p>{{ game.game_date }}</p></td>
+            <td>
+                <img [src]="findImagePath(game.first_team)" /><p>{{ game.first_team }}</p><span>-</span> 
+                <img [src]="findImagePath(game.second_team)" /><p>{{ game.second_team }}</p>
+            </td> 
+            <td (click)="handleBetTicket('first_team', game, $event)" class="odds-td g{{game._id}}"><p>{{ game.firstwin_odds }}</p></td>
+            <td (click)="handleBetTicket('Draw', game, $event)" class="odds-td g{{game._id}}"><p>{{ game.draw_odds }}</p></td>
+            <td (click)="handleBetTicket('second_team', game, $event)" class="odds-td g{{game._id}}"><p>{{ game.secondwin_odds }}</p></td>          
+            <td *ngIf="isAdmin && windowWidth > 1200"><a routerLink="edit/{{game._id}}"><p>Edit</p></a></td>
+            <td *ngIf="isAuthenticated  && windowWidth > 1200"><p>{{game.betted ? "betted" : ""}}</p></td> 
+          </tr>
+        </tbody>
+      </table>
+      <div class="betting_content">
+        <app-betting-form [selectedWinner]="selectedWinner" 
+                          [selectedGames]="selectedGames"
+                          [generalCoef]="generalCoef"
+                          [windowWidth]="windowWidth"
+                          (cancelBet)="onCancelBet($event)"></app-betting-form>
+        <app-showbets-buttons *ngIf="isAuthenticated"
+                              class="mybets-buttons"
+                              [showActiveBetsButton]="true"
+                              [showArchivedBetsButton]="true"></app-showbets-buttons>
+      </div>      
+  </div>                      
+</div>
