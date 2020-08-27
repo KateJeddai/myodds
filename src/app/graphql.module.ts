@@ -6,7 +6,7 @@ import {setContext} from 'apollo-link-context';
 import {ApolloLink} from 'apollo-link';
 import { HttpClientModule } from '@angular/common/http';
 
-const uri = 'http://localhost:3000/graphql';
+const uri = 'graphql';
 
 export function createApollo(httpLink: HttpLink) {
     const basic = setContext((operation, context) => ({
