@@ -70,6 +70,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
 // app.use(express.static(distDir));
 
 if(process.env.NODE_ENV === 'production') {
+    const distDir = __dirname + "/dist/";
     app.use(express.static(distDir));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'dist', 'client', 'index.html'));
