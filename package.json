@@ -8,9 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "nodemon app.js",
+    "server": "node app.js",
     "client": "ng serve --proxy-config proxy.conf.json",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
+    "postinstall": "ng build --output-path dist"
   },
   "engines": {
     "node": "12.18.3"
